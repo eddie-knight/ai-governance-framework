@@ -9,7 +9,7 @@ on:
       grcli_version:
         description: "grcli image tag to install (pin a version for reproducible releases)"
         type: string
-        default: latest
+        default: v0.1.1
       dry_run:
         description: "Build & validate bundles without pushing (no network writes)"
         type: boolean

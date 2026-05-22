@@ -6,10 +6,6 @@ name: Publish Gemara bundles to grc.store
 on:
   workflow_dispatch:
     inputs:
-      grcli_version:
-        description: "grcli image tag to install (pin a version for reproducible releases)"
-        type: string
-        default: v0.1.1
       dry_run:
         description: "Build & validate bundles without pushing (no network writes)"
         type: boolean
@@ -27,7 +23,7 @@ jobs:
     # reviewer before publish, or delete this line.
     environment: grc.store
     env:
-      GRCLI_VERSION: ${{ inputs.grcli_version }}
+      GRCLI_VERSION: v0.1.1   # only dependency; pin here (matches validate-gemara.yml)
       DRY_RUN: ${{ inputs.dry_run }}
       # Must match metadata.gemara-version in the YAML artifacts.
       GEMARA_VERSION: v1.1.0

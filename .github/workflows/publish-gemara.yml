@@ -25,8 +25,9 @@ jobs:
     env:
       GRCLI_VERSION: v0.1.1   # only dependency; pin here (matches validate-gemara.yml)
       DRY_RUN: ${{ inputs.dry_run }}
-      # Must match metadata.gemara-version in the YAML artifacts.
-      GEMARA_VERSION: v1.1.0
+      # Gemara CUE spec pinned to the immutable v1.1.0 commit (tags are mutable);
+      # the pinned release must match metadata.gemara-version in the YAML artifacts.
+      GEMARA_SHA: 7204c37b4fdb65578195b522d20cea0742feb338  # gemaraproj/gemara v1.1.0
       GRCLI_GEMARA_SPEC_DIR: ${{ github.workspace }}/.gemara-spec
     steps:
       - uses: actions/checkout@v4
@@ -48,8 +49,12 @@ jobs:
 
       - name: Fetch Gemara spec for validation
         run: |
-          git clone --depth 1 --branch "${GEMARA_VERSION}" \
-            https://github.com/gemaraproj/gemara.git "${GRCLI_GEMARA_SPEC_DIR}"
+          set -euo pipefail
+          # Fetch by SHA (immutable), not by tag (mutable).
+          git init -q "${GRCLI_GEMARA_SPEC_DIR}"
+          git -C "${GRCLI_GEMARA_SPEC_DIR}" fetch --depth 1 -q \
+            https://github.com/gemaraproj/gemara.git "${GEMARA_SHA}"
+          git -C "${GRCLI_GEMARA_SPEC_DIR}" checkout -q --detach FETCH_HEAD
 
       - name: Validate artifacts
         run: |

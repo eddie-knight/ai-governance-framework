@@ -4,7 +4,7 @@ metadata:
   id: AIR-NIST-MAP-001
   type: MappingDocument
   gemara-version: "1.1.0"
-  version: "0.1.0"
+  version: "0.2.0"
   description: >
     Maps FINOS AI Governance Framework mitigations (guidelines) to
     NIST SP 800-53 Revision 5 security and privacy controls.
@@ -16,7 +16,7 @@ metadata:
   mapping-references:
     - id: FINOS-AIR
       title: AI Governance Framework
-      version: "0.1.0"
+      version: "0.2.0"
       url: "https://air-governance-framework.finos.org"
       description: FINOS AI Governance Framework mitigations and risks
     - id: NIST-800-53
@@ -91,3 +91,667 @@ mappings:
         rationale: >
           Firewalling implements output filtering for model responses.
 
+  # AIR-DET-001: AI Data Leakage Prevention and Detection
+  - id: MAP-DET001-ai-data-leakage
+    source: AIR-DET-001
+    relationship: supports
+    targets:
+      - entry-id: AC-4
+        rationale: >
+          Enforces information-flow policies across AI data pathways and trust
+          boundaries.
+      - entry-id: AC-20
+        rationale: >
+          Governs the use of external AI services and systems.
+      - entry-id: AU-13
+        rationale: >
+          Monitors for unauthorized disclosure of information from AI systems.
+      - entry-id: CA-3
+        rationale: >
+          Governs information-exchange agreements with external AI providers.
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+      - entry-id: IR-4
+        rationale: >
+          Supports incident handling for AI-specific security events.
+      - entry-id: IR-9
+        rationale: >
+          Supports response to information spillage from AI systems.
+      - entry-id: MP-6
+        rationale: >
+          Sanitizes media and data stores in AI pipelines.
+      - entry-id: SA-9
+        rationale: >
+          Governs external AI system services and their data handling.
+      - entry-id: SC-7
+        rationale: >
+          Provides boundary protection at the user, application, and model
+          layers.
+      - entry-id: SC-8
+        rationale: >
+          Protects the confidentiality and integrity of AI data in transit,
+          including MCP traffic.
+      - entry-id: SC-28
+        rationale: >
+          Protects AI data at rest through encryption.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+      - entry-id: SI-20
+        rationale: >
+          Supports tainting and marking of sensitive AI data for leakage
+          detection.
+
+  # AIR-DET-004: AI System Observability
+  - id: MAP-DET004-ai-system-observability
+    source: AIR-DET-004
+    relationship: supports
+    targets:
+      - entry-id: AC-2
+        rationale: >
+          Manages accounts and identities, including non-human and agent
+          identities, used by AI systems.
+      - entry-id: AU-2
+        rationale: >
+          Defines the AI system events that must be logged.
+      - entry-id: AU-3
+        rationale: >
+          Ensures AI audit records capture sufficient decision content.
+      - entry-id: AU-6
+        rationale: >
+          Supports review and analysis of AI audit records for anomalies.
+      - entry-id: AU-11
+        rationale: >
+          Retains AI audit records for the required period.
+      - entry-id: AU-12
+        rationale: >
+          Generates audit records across AI system components.
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+      - entry-id: IR-4
+        rationale: >
+          Supports incident handling for AI-specific security events.
+      - entry-id: IR-5
+        rationale: >
+          Monitors for AI security incidents.
+      - entry-id: RA-10
+        rationale: >
+          Supports threat hunting across AI system telemetry.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+      - entry-id: SI-7
+        rationale: >
+          Protects the integrity of AI software, model artifacts, and data.
+
+  # AIR-PREV-005: System Acceptance Testing
+  - id: MAP-PREV005-system-acceptance-testing
+    source: AIR-PREV-005
+    relationship: supports
+    targets:
+      - entry-id: CA-2
+        rationale: >
+          Provides assessment of AI system controls before and during
+          operation.
+      - entry-id: CA-6
+        rationale: >
+          Supports authorization decisions for AI systems entering production.
+      - entry-id: CM-4
+        rationale: >
+          Analyzes the impact of changes to AI models before release.
+      - entry-id: SA-4
+        rationale: >
+          Embeds AI security and management requirements into acquisition
+          agreements.
+      - entry-id: SA-11
+        rationale: >
+          Requires developer testing and evaluation of AI systems.
+      - entry-id: SI-2
+        rationale: >
+          Supports remediation of flaws identified in AI systems.
+      - entry-id: SI-6
+        rationale: >
+          Verifies correct operation of AI security and privacy functions.
+
+  # AIR-PREV-006: Data Quality & Classification/Sensitivity
+  - id: MAP-PREV006-data-quality-classification
+    source: AIR-PREV-006
+    relationship: supports
+    targets:
+      - entry-id: AC-1
+        rationale: >
+          Establishes the access-control policies and procedures governing AI
+          data and systems.
+      - entry-id: AC-4
+        rationale: >
+          Enforces information-flow policies across AI data pathways and trust
+          boundaries.
+      - entry-id: AC-16
+        rationale: >
+          Binds security and privacy attributes such as classification labels
+          to AI data.
+      - entry-id: AT-2
+        rationale: >
+          Builds workforce awareness of AI risks and acceptable use.
+      - entry-id: AT-3
+        rationale: >
+          Provides role-based training for staff operating or overseeing AI
+          systems.
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+      - entry-id: CM-13
+        rationale: >
+          Maps data actions performed by AI systems on sensitive information.
+      - entry-id: PM-11
+        rationale: >
+          Aligns AI deployment with defined mission and business processes.
+      - entry-id: PM-22
+        rationale: >
+          Supports quality management of personally identifiable information
+          used by AI.
+      - entry-id: PM-23
+        rationale: >
+          Establishes data-governance accountability for AI data.
+      - entry-id: RA-2
+        rationale: >
+          Supports security categorization of AI data and systems.
+      - entry-id: SI-7
+        rationale: >
+          Protects the integrity of AI software, model artifacts, and data.
+      - entry-id: SI-10
+        rationale: >
+          Validates inputs to AI models, tools, and APIs.
+      - entry-id: SI-12
+        rationale: >
+          Governs the management and retention of AI information.
+      - entry-id: SI-18
+        rationale: >
+          Supports quality operations for personally identifiable information
+          in AI data.
+
+  # AIR-PREV-007: Legal and Contractual Frameworks for AI Systems
+  - id: MAP-PREV007-legal-and-contractual
+    source: AIR-PREV-007
+    relationship: supports
+    targets:
+      - entry-id: AC-20
+        rationale: >
+          Governs the use of external AI services and systems.
+      - entry-id: CA-3
+        rationale: >
+          Governs information-exchange agreements with external AI providers.
+      - entry-id: IR-6
+        rationale: >
+          Supports reporting of AI security and data-spillage incidents.
+      - entry-id: PM-30
+        rationale: >
+          Defines a supply-chain risk-management strategy covering AI model
+          providers.
+      - entry-id: PS-7
+        rationale: >
+          Imposes security requirements on external personnel supporting AI
+          systems.
+      - entry-id: SA-4
+        rationale: >
+          Embeds AI security and management requirements into acquisition
+          agreements.
+      - entry-id: SA-9
+        rationale: >
+          Governs external AI system services and their data handling.
+      - entry-id: SR-2
+        rationale: >
+          Establishes a supply-chain risk-management plan for AI providers.
+      - entry-id: SR-3
+        rationale: >
+          Applies supply-chain controls across the AI model lifecycle.
+      - entry-id: SR-5
+        rationale: >
+          Defines acquisition strategies and tools for trustworthy AI
+          components.
+      - entry-id: SR-8
+        rationale: >
+          Requires notification agreements for upstream AI model changes.
+
+  # AIR-PREV-008: Quality of Service (QoS) and DDoS Prevention for AI Systems
+  - id: MAP-PREV008-quality-of-service
+    source: AIR-PREV-008
+    relationship: supports
+    targets:
+      - entry-id: SC-5
+        rationale: >
+          Protects AI services against denial-of-service and denial-of-wallet
+          conditions.
+      - entry-id: SC-6
+        rationale: >
+          Safeguards the availability of AI compute resources.
+      - entry-id: SC-7
+        rationale: >
+          Provides boundary protection at the user, application, and model
+          layers.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+      - entry-id: SI-10
+        rationale: >
+          Validates inputs to AI models, tools, and APIs.
+      - entry-id: SI-13
+        rationale: >
+          Helps prevent predictable failures in AI serving infrastructure.
+      - entry-id: IR-4
+        rationale: >
+          Supports incident handling for AI-specific security events.
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+
+  # AIR-DET-009: AI System Alerting and Denial of Wallet (DoW) / Spend Monitoring
+  - id: MAP-DET009-ai-system-alerting
+    source: AIR-DET-009
+    relationship: supports
+    targets:
+      - entry-id: AC-2
+        rationale: >
+          Manages accounts and identities, including non-human and agent
+          identities, used by AI systems.
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+      - entry-id: IR-4
+        rationale: >
+          Supports incident handling for AI-specific security events.
+      - entry-id: SC-5
+        rationale: >
+          Protects AI services against denial-of-service and denial-of-wallet
+          conditions.
+      - entry-id: SC-6
+        rationale: >
+          Safeguards the availability of AI compute resources.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+
+  # AIR-PREV-010: AI Model Version Pinning
+  - id: MAP-PREV010-ai-model-version
+    source: AIR-PREV-010
+    relationship: supports
+    targets:
+      - entry-id: CM-2
+        rationale: >
+          Maintains a baseline configuration, including pinned AI model
+          versions.
+      - entry-id: CM-3
+        rationale: >
+          Controls configuration changes to AI models and systems.
+      - entry-id: CM-4
+        rationale: >
+          Analyzes the impact of changes to AI models before release.
+      - entry-id: CM-8
+        rationale: >
+          Inventories AI system components, including model versions and
+          dependencies.
+      - entry-id: AU-2
+        rationale: >
+          Defines the AI system events that must be logged.
+      - entry-id: SA-4
+        rationale: >
+          Embeds AI security and management requirements into acquisition
+          agreements.
+      - entry-id: SA-10
+        rationale: >
+          Requires developer configuration management for AI model changes.
+      - entry-id: SA-22
+        rationale: >
+          Addresses risks from unsupported AI model versions or components.
+      - entry-id: SR-4
+        rationale: >
+          Establishes provenance for AI models and components.
+      - entry-id: SR-8
+        rationale: >
+          Requires notification agreements for upstream AI model changes.
+
+  # AIR-DET-011: Human Feedback Loop for AI Systems
+  - id: MAP-DET011-human-feedback-loop
+    source: AIR-DET-011
+    relationship: supports
+    targets:
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+      - entry-id: IR-6
+        rationale: >
+          Supports reporting of AI security and data-spillage incidents.
+      - entry-id: PM-26
+        rationale: >
+          Manages complaints and feedback about AI-driven outcomes.
+      - entry-id: RA-5
+        rationale: >
+          Monitors AI components for vulnerabilities.
+      - entry-id: SI-2
+        rationale: >
+          Supports remediation of flaws identified in AI systems.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+      - entry-id: AT-2
+        rationale: >
+          Builds workforce awareness of AI risks and acceptable use.
+      - entry-id: CA-2
+        rationale: >
+          Provides assessment of AI system controls before and during
+          operation.
+
+  # AIR-PREV-012: Role-Based Access Control for AI Data
+  - id: MAP-PREV012-role-based-access
+    source: AIR-PREV-012
+    relationship: supports
+    targets:
+      - entry-id: AC-1
+        rationale: >
+          Establishes the access-control policies and procedures governing AI
+          data and systems.
+      - entry-id: AC-2
+        rationale: >
+          Manages accounts and identities, including non-human and agent
+          identities, used by AI systems.
+      - entry-id: AC-3
+        rationale: >
+          Enforces access decisions on AI data, models, and tools.
+      - entry-id: AC-5
+        rationale: >
+          Maintains separation of duties so agents or AI workflows cannot
+          bypass approval chains.
+      - entry-id: AC-6
+        rationale: >
+          Applies least privilege to AI system and agent permissions.
+      - entry-id: AC-16
+        rationale: >
+          Binds security and privacy attributes such as classification labels
+          to AI data.
+      - entry-id: AU-2
+        rationale: >
+          Defines the AI system events that must be logged.
+      - entry-id: AU-6
+        rationale: >
+          Supports review and analysis of AI audit records for anomalies.
+      - entry-id: IA-2
+        rationale: >
+          Authenticates users, and agents acting on their behalf, accessing AI
+          systems.
+      - entry-id: IA-4
+        rationale: >
+          Manages identifiers for AI system and agent identities.
+      - entry-id: IA-5
+        rationale: >
+          Manages authenticators and secrets used by AI systems and agents.
+      - entry-id: CM-12
+        rationale: >
+          Identifies where AI data is located across the pipeline.
+
+  # AIR-DET-013: Providing Citations and Source Traceability for AI-Generated Information
+  - id: MAP-DET013-providing-citations-and
+    source: AIR-DET-013
+    relationship: supports
+    targets:
+      - entry-id: AU-10
+        rationale: >
+          Provides non-repudiation of AI-generated outputs through traceable
+          citations.
+      - entry-id: SA-8
+        rationale: >
+          Applies security and privacy engineering principles to AI system
+          design.
+      - entry-id: AC-16
+        rationale: >
+          Binds security and privacy attributes such as classification labels
+          to AI data.
+      - entry-id: SI-7
+        rationale: >
+          Protects the integrity of AI software, model artifacts, and data.
+      - entry-id: AT-2
+        rationale: >
+          Builds workforce awareness of AI risks and acceptable use.
+
+  # AIR-PREV-014: Encryption of AI Data at Rest
+  - id: MAP-PREV014-encryption-of-ai
+    source: AIR-PREV-014
+    relationship: supports
+    targets:
+      - entry-id: SC-28
+        rationale: >
+          Protects AI data at rest through encryption.
+      - entry-id: SC-12
+        rationale: >
+          Manages cryptographic keys protecting AI data.
+      - entry-id: SC-13
+        rationale: >
+          Applies cryptographic protection to AI data.
+      - entry-id: CP-9
+        rationale: >
+          Provides backup of AI data and model artifacts.
+      - entry-id: AC-19
+        rationale: >
+          Controls access from mobile and endpoint devices interacting with AI
+          systems.
+      - entry-id: SA-9
+        rationale: >
+          Governs external AI system services and their data handling.
+      - entry-id: CM-3
+        rationale: >
+          Controls configuration changes to AI models and systems.
+
+  # AIR-DET-015: Using Large Language Models for Automated Evaluation (LLM-as-a-Judge)
+  - id: MAP-DET015-using-large-language
+    source: AIR-DET-015
+    relationship: supports
+    targets:
+      - entry-id: CA-2
+        rationale: >
+          Provides assessment of AI system controls before and during
+          operation.
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+      - entry-id: AU-6
+        rationale: >
+          Supports review and analysis of AI audit records for anomalies.
+      - entry-id: RA-10
+        rationale: >
+          Supports threat hunting across AI system telemetry.
+      - entry-id: SA-11
+        rationale: >
+          Requires developer testing and evaluation of AI systems.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+      - entry-id: SI-7
+        rationale: >
+          Protects the integrity of AI software, model artifacts, and data.
+      - entry-id: SI-15
+        rationale: >
+          Filters AI model outputs before they reach users or systems.
+
+  # AIR-DET-016: Preserving Source Data Access Controls in AI Systems
+  - id: MAP-DET016-preserving-source-data
+    source: AIR-DET-016
+    relationship: supports
+    targets:
+      - entry-id: AC-3
+        rationale: >
+          Enforces access decisions on AI data, models, and tools.
+      - entry-id: AC-4
+        rationale: >
+          Enforces information-flow policies across AI data pathways and trust
+          boundaries.
+      - entry-id: AC-6
+        rationale: >
+          Applies least privilege to AI system and agent permissions.
+      - entry-id: AC-16
+        rationale: >
+          Binds security and privacy attributes such as classification labels
+          to AI data.
+      - entry-id: AC-21
+        rationale: >
+          Controls information sharing so AI outputs respect source
+          authorizations.
+      - entry-id: AU-2
+        rationale: >
+          Defines the AI system events that must be logged.
+      - entry-id: AU-6
+        rationale: >
+          Supports review and analysis of AI audit records for anomalies.
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+      - entry-id: CA-8
+        rationale: >
+          Supports penetration testing of AI system boundaries and access
+          controls.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+      - entry-id: SI-7
+        rationale: >
+          Protects the integrity of AI software, model artifacts, and data.
+
+  # AIR-PREV-017: AI Firewall Implementation and Management
+  - id: MAP-PREV017-ai-firewall-implementation
+    source: AIR-PREV-017
+    relationship: supports
+    targets:
+      - entry-id: AC-4
+        rationale: >
+          Enforces information-flow policies across AI data pathways and trust
+          boundaries.
+      - entry-id: SC-5
+        rationale: >
+          Protects AI services against denial-of-service and denial-of-wallet
+          conditions.
+      - entry-id: SC-7
+        rationale: >
+          Provides boundary protection at the user, application, and model
+          layers.
+      - entry-id: SI-3
+        rationale: >
+          Protects against malicious code, including poisoned models or tools.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+      - entry-id: SI-10
+        rationale: >
+          Validates inputs to AI models, tools, and APIs.
+      - entry-id: SI-15
+        rationale: >
+          Filters AI model outputs before they reach users or systems.
+
+  # AIR-PREV-018: Agent Authority Least Privilege Framework
+  - id: MAP-PREV018-agent-authority-least
+    source: AIR-PREV-018
+    relationship: supports
+    targets:
+      - entry-id: AC-6
+        rationale: >
+          Applies least privilege to AI system and agent permissions.
+      - entry-id: AC-2
+        rationale: >
+          Manages accounts and identities, including non-human and agent
+          identities, used by AI systems.
+      - entry-id: AC-3
+        rationale: >
+          Enforces access decisions on AI data, models, and tools.
+      - entry-id: AC-5
+        rationale: >
+          Maintains separation of duties so agents or AI workflows cannot
+          bypass approval chains.
+
+  # AIR-PREV-019: Tool Chain Validation and Sanitization
+  - id: MAP-PREV019-tool-chain-validation
+    source: AIR-PREV-019
+    relationship: supports
+    targets:
+      - entry-id: SI-10
+        rationale: >
+          Validates inputs to AI models, tools, and APIs.
+      - entry-id: SI-15
+        rationale: >
+          Filters AI model outputs before they reach users or systems.
+      - entry-id: SC-4
+        rationale: >
+          Prevents leakage of information through shared AI system resources.
+
+  # AIR-PREV-020: MCP Server Security Governance
+  - id: MAP-PREV020-mcp-server-security
+    source: AIR-PREV-020
+    relationship: supports
+    targets:
+      - entry-id: SA-9
+        rationale: >
+          Governs external AI system services and their data handling.
+      - entry-id: SC-8
+        rationale: >
+          Protects the confidentiality and integrity of AI data in transit,
+          including MCP traffic.
+      - entry-id: SI-4
+        rationale: >
+          Monitors AI system activity to detect anomalies and misuse.
+      - entry-id: SA-12
+        rationale: >
+          Protects the AI model supply chain.
+
+  # AIR-DET-021: Agent Decision Audit and Explainability
+  - id: MAP-DET021-agent-decision-audit
+    source: AIR-DET-021
+    relationship: supports
+    targets:
+      - entry-id: AU-2
+        rationale: >
+          Defines the AI system events that must be logged.
+      - entry-id: AU-3
+        rationale: >
+          Ensures AI audit records capture sufficient decision content.
+      - entry-id: AU-6
+        rationale: >
+          Supports review and analysis of AI audit records for anomalies.
+      - entry-id: CA-7
+        rationale: >
+          Provides continuous monitoring of AI system security and behaviour.
+
+  # AIR-PREV-022: Multi-Agent Isolation and Segmentation
+  - id: MAP-PREV022-multi-agent-isolation
+    source: AIR-PREV-022
+    relationship: supports
+    targets:
+      - entry-id: SC-7
+        rationale: >
+          Provides boundary protection at the user, application, and model
+          layers.
+      - entry-id: SC-32
+        rationale: >
+          Partitions multi-agent systems into isolated components.
+      - entry-id: AC-4
+        rationale: >
+          Enforces information-flow policies across AI data pathways and trust
+          boundaries.
+      - entry-id: SC-3
+        rationale: >
+          Isolates security-relevant AI functions from other components.
+
+  # AIR-PREV-023: Agentic System Credential Protection Framework
+  - id: MAP-PREV023-agentic-system-credential
+    source: AIR-PREV-023
+    relationship: supports
+    targets:
+      - entry-id: IA-5
+        rationale: >
+          Manages authenticators and secrets used by AI systems and agents.
+      - entry-id: SC-28
+        rationale: >
+          Protects AI data at rest through encryption.
+      - entry-id: AC-3
+        rationale: >
+          Enforces access decisions on AI data, models, and tools.
+      - entry-id: AU-6
+        rationale: >
+          Supports review and analysis of AI audit records for anomalies.

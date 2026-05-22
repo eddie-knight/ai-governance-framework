@@ -10,8 +10,8 @@ metadata:
     NIST SP 800-53 Revision 5 security and privacy controls.
     References derived from AIGF mitigation frontmatter.
   author:
-    id: finos
-    name: FINOS
+    id: FINOS-AIGF
+    name: FINOS-AIGF
     type: Human
   mapping-references:
     - id: FINOS-AIR

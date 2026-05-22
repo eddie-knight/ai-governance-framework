@@ -10,8 +10,8 @@ metadata:
     Each principle represents a foundational value that one or more
     AIGF mitigations (guidelines) are designed to uphold.
   author:
-    id: finos
-    name: FINOS
+    id: FINOS-AIGF
+    name: FINOS-AIGF
     type: Human
   mapping-references:
     - id: FINOS-AIR

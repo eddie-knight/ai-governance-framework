@@ -10,8 +10,8 @@ metadata:
     pathway through which AI system failures or negative outcomes
     may be realized in financial services deployments.
   author:
-    id: finos
-    name: FINOS
+    id: FINOS-AIGF
+    name: FINOS-AIGF
     type: Human
   draft: true
 

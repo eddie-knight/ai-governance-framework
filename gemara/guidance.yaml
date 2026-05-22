@@ -5,11 +5,12 @@ metadata:
   gemara-version: "1.1.0"
   version: "0.1.0"
   description: >
-    A comprehensive collection of risks and mitigations that support
-    on-boarding, development of, and running Generative AI solutions.
+    An initial Gemara representation of selected FINOS AI Governance
+    Framework mitigations. Coverage is being expanded incrementally;
+    see the gemara/ README for the roadmap.
   author:
-    id: finos
-    name: FINOS
+    id: FINOS-AIGF
+    name: FINOS-AIGF
     type: Human
   mapping-references:
     - id: AIR-PRIN

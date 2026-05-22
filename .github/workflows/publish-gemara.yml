@@ -1,0 +1,96 @@
+name: Publish Gemara bundles to grc.store
+
+# Manual release pipeline. Validates the Gemara artifacts in gemara/ and
+# publishes each one to grc.store via grcli. Trigger from the Actions tab
+# ("Run workflow"); nothing here runs on push.
+on:
+  workflow_dispatch:
+    inputs:
+      grcli_version:
+        description: "grcli image tag to install (pin a version for reproducible releases)"
+        type: string
+        default: latest
+      dry_run:
+        description: "Build & validate bundles without pushing (no network writes)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read    # checkout only — bundles are pushed to grc.store, not this repo
+  id-token: write   # REQUIRED — grcli detects Actions and mints a grc.store token via GHA OIDC
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    # Optional approval gate for this outward-facing release. No secret needed
+    # (auth is GHA OIDC). Create the environment in repo Settings to require a
+    # reviewer before publish, or delete this line.
+    environment: grc.store
+    env:
+      GRCLI_VERSION: ${{ inputs.grcli_version }}
+      DRY_RUN: ${{ inputs.dry_run }}
+      # Must match metadata.gemara-version in the YAML artifacts.
+      GEMARA_VERSION: v1.1.0
+      GRCLI_GEMARA_SPEC_DIR: ${{ github.workspace }}/.gemara-spec
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install oras
+        uses: oras-project/setup-oras@v1.2.4
+
+      - name: Install grcli
+        run: |
+          set -euo pipefail
+          oras pull "ghcr.io/revanite-io/grcli:${GRCLI_VERSION}" --platform linux/amd64
+          sudo install grcli /usr/local/bin/grcli
+          grcli --version
+
+      - name: Install cue (required by grcli validate)
+        uses: cue-lang/setup-cue@v1.0.1
+        with:
+          version: v0.16.1
+
+      - name: Fetch Gemara spec for validation
+        run: |
+          git clone --depth 1 --branch "${GEMARA_VERSION}" \
+            https://github.com/gemaraproj/gemara.git "${GRCLI_GEMARA_SPEC_DIR}"
+
+      - name: Validate artifacts
+        run: |
+          grcli validate \
+            -f gemara/principles.yaml,gemara/vectors.yaml,gemara/guidance.yaml,gemara/aigf-to-nist-mapping.yaml \
+            --spec "${GRCLI_GEMARA_SPEC_DIR}"
+
+      - name: Publish to grc.store
+        # No secret needed: with id-token:write set above, grcli detects Actions
+        # (GITHUB_ACTIONS + ACTIONS_ID_TOKEN_REQUEST_*) and mints a grc.store
+        # session via OIDC — which also mints the registry push token.
+        # Override for non-Actions runs only: --token / GRCLI_TOKEN.
+        run: |
+          set -euo pipefail
+          # One artifact per publish call. Principles + vectors go first because
+          # guidance.yaml references them (AIR-PRIN / AIR-VEC) as mapping-references.
+          # Defaults: repository = <author.id>/<metadata.id>, tag = metadata.version.
+          files=(
+            gemara/principles.yaml
+            gemara/vectors.yaml
+            gemara/guidance.yaml
+            gemara/aigf-to-nist-mapping.yaml
+          )
+          for f in "${files[@]}"; do
+            echo "::group::publish ${f}"
+            if [ "${DRY_RUN}" = "true" ]; then
+              grcli publish "${f}" --no-sign --dry-run --output "grcli-out/$(basename "${f%.yaml}")"
+            else
+              grcli publish "${f}" --no-sign
+            fi
+            echo "::endgroup::"
+          done
+
+      - name: Upload dry-run bundles
+        if: ${{ inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: gemara-bundles-dry-run
+          path: grcli-out/
+          if-no-files-found: error
